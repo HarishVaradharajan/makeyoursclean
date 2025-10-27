@@ -1,0 +1,358 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* 🔹 Fixed Top Navigation Bar */
+.top-bar {
+  position: fixed;              
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 3px solid #00bcd4;
+  z-index: 10;                  
+}
+
+.site-title {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* 🔹 Section that holds video and content */
+.video-section {
+  position: relative;
+  margin-top: 80px;             
+  min-height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+/* Background video */
+.background-video {
+  position: fixed;
+  top: 80px;                    
+  left: 0;
+  width: 100%;
+  height: calc(100% - 80px);
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6);
+}
+
+/* Container for all content cards */
+.container {
+  display: flex;
+  flex-direction: column;  /* vertical stacking */
+  align-items: center;
+  gap: 30px;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+/* Data cards */
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 25px;
+  width: 90%;
+  max-width: 600px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Text styles */
+h2 {
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 🔹 Responsive for Mobile */
+@media only screen and (max-width: 768px) {
+  .top-bar {
+    padding: 15px 0;
+  }
+  .site-title {
+    font-size: 1.5rem;
+  }
+  .video-section {
+    margin-top: 70px; 
+  }
+  .background-video {
+    top: 70px;
+    height: calc(100% - 70px);
+  }
+  .container {
+    padding: 50px 15px;
+    gap: 25px;
+  }
+  .card {
+    padding: 20px;
+    width: 95%;
+    max-width: 100%;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  p {
+    font-size: 0.95rem;
+  }
+}
+
+/* 🔹 Responsive for small phones */
+@media only screen and (max-width: 480px) {
+  .top-bar {
+    padding: 12px 0;
+  }
+  .site-title {
+    font-size: 1.3rem;
+  }
+  .video-section {
+    margin-top: 60px;
+  }
+  .background-video {
+    top: 60px;
+    height: calc(100% - 60px);
+  }
+  .container {
+    padding: 40px 10px;
+    gap: 20px;
+  }
+  .card {
+    padding: 18px;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+}
+/* Laundry table container inside glass card */
+.laundry-table {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto; /* horizontal scroll on mobile */
+}
+
+.row {
+  display: flex;
+  padding: 10px 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  flex-wrap: nowrap;
+}
+
+.row.header {
+  font-weight: bold;
+  background: rgba(255,255,255,0.1);
+}
+
+.column {
+  flex: 1;                 /* evenly space columns */
+  padding: 5px 10px;
+  min-width: 120px;        /* ensures readability on mobile */
+  word-wrap: break-word;
+}
+
+/* Scrollbar styling for better look */
+.laundry-table::-webkit-scrollbar {
+  height: 6px;
+}
+.laundry-table::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  .row {
+    flex-wrap: wrap;       /* stack columns on smaller screens */
+  }
+  .column {
+    min-width: 45%;        /* two columns per row on tablet */
+    margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .column {
+    min-width: 100%;       /* one column per row on mobile */
+  }
+}
+/* Individual product row in order form */
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.product-name {
+  font-weight: 500;
+  flex: 2;
+  color: #fff;
+}
+
+.quantity-input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 480px) {
+  .product-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .quantity-input {
+    width: 100%;
+  }
+}
+/* User info input fields */
+.user-input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* Individual product row in order form */
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.product-name {
+  font-weight: 500;
+  flex: 2;
+  color: #fff;
+}
+
+.quantity-input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 480px) {
+  .product-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .quantity-input {
+    width: 100%;
+  }
+}
+.action-btn {
+  background-color: #00bcd4;
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 12px;
+  text-decoration: none; /* For <a> links */
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.action-btn:hover {
+  background-color: #0097a7;
+}
+/* Container for floating buttons */
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999; /* above everything */
+}
+
+/* Floating Call Button */
+.call-btn {
+  background-color: #00bcd4;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.call-btn:hover {
+  background-color: #0097a7;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-btn {
+  background-color: #25D366;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+  background-color: #128C7E;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 480px) {
+  .floating-buttons {
+    bottom: 15px;
+    right: 15px;
+    gap: 8px;
+  }
+
+  .call-btn, .whatsapp-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}

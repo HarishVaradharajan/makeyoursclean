@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Place Order - Make You Clean</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 🔹 Top Navigation Bar -->
+  <header class="top-bar">
+    <h1 class="site-title">Make You Clean👌👌👌</h1>
+  </header>
+
+  <!-- 🔹 Background Video Section -->
+  <section class="video-section">
+    <video class="background-video" autoplay muted loop>
+      <source src="assets/background.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- 🔹 Foreground Containers -->
+    <div class="container">
+
+      <!-- 🧺 Container 1 - Place Order Form -->
+      <div class="card">
+        <h2>Place Your Laundry Order</h2>
+        <p>Enter your details and select the quantity for each service:</p>
+
+        <form id="orderForm" method="post" style="margin-top:20px; display:flex; flex-direction:column; gap:15px;">
+
+          <!-- User Details -->
+          <input type="text" name="customer_name" placeholder="Your Name" required class="user-input">
+          <input type="tel" name="customer_phone" placeholder="Phone Number" required class="user-input">
+          <input type="email" name="customer_email" placeholder="Email Address" required class="user-input">
+
+          <!-- Product / Service Rows -->
+          <div class="product-row" data-price="20">
+            <div class="product-name">Shirt / T-shirt - Wash & Fold (₹20)</div>
+            <input type="number" name="shirt_wash_fold" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="30">
+            <div class="product-name">Shirt / T-shirt - Wash & Iron (₹30)</div>
+            <input type="number" name="shirt_wash_iron" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="50">
+            <div class="product-name">Shirt / T-shirt - Dry Clean (₹50)</div>
+            <input type="number" name="shirt_dry_clean" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="40">
+            <div class="product-name">Jeans / Pants - Wash & Fold (₹40)</div>
+            <input type="number" name="jeans_wash_fold" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="55">
+            <div class="product-name">Jeans / Pants - Wash & Iron (₹55)</div>
+            <input type="number" name="jeans_wash_iron" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="80">
+            <div class="product-name">Jeans / Pants - Dry Clean (₹80)</div>
+            <input type="number" name="jeans_dry_clean" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="60">
+            <div class="product-name">Dress / Gown - Wash & Fold (₹60)</div>
+            <input type="number" name="dress_wash_fold" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="80">
+            <div class="product-name">Dress / Gown - Wash & Iron (₹80)</div>
+            <input type="number" name="dress_wash_iron" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="120">
+            <div class="product-name">Dress / Gown - Dry Clean (₹120)</div>
+            <input type="number" name="dress_dry_clean" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="50">
+            <div class="product-name">Bedsheet / Pillowcase - Wash & Fold (₹50)</div>
+            <input type="number" name="bedsheet_wash_fold" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="30">
+            <div class="product-name">Bedsheet / Pillowcase - Iron Only (₹30)</div>
+            <input type="number" name="bedsheet_iron_only" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="200">
+            <div class="product-name">Jacket / Coat - Dry Clean Only (₹200)</div>
+            <input type="number" name="jacket_dry_clean" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="10">
+            <div class="product-name">Socks / Underwear - Wash & Fold (₹10)</div>
+            <input type="number" name="socks_wash_fold" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="150">
+            <div class="product-name">Curtains / Drapes - Wash & Fold (₹150)</div>
+            <input type="number" name="curtains_wash_fold" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <div class="product-row" data-price="40">
+            <div class="product-name">School Uniform - Wash & Iron (₹40)</div>
+            <input type="number" name="uniform_wash_iron" min="0" placeholder="No. of items" class="quantity-input">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="action-btn" style="width:50%; align-self:center; margin-top:10px;">Submit Order</button>
+
+        </form>
+      </div>
+
+      <!-- 🧺 Container 2 - Dynamic Order Preview -->
+      <div id="orderPreviewContainer"></div>
+
+    </div> <!-- End of container -->
+
+  </section>
+
+  <!-- 🔹 JavaScript for Dynamic Order Preview with Total -->
+  <script>
+    const orderForm = document.getElementById('orderForm');
+    const previewContainer = document.getElementById('orderPreviewContainer');
+
+    orderForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get user details
+      const name = orderForm.customer_name.value;
+      const phone = orderForm.customer_phone.value;
+      const email = orderForm.customer_email.value;
+
+      // Collect products and calculate total
+      const products = [];
+      let totalAmount = 0;
+
+      Array.from(orderForm.querySelectorAll('.product-row')).forEach(row => {
+        const productName = row.querySelector('.product-name').innerText;
+        const quantity = parseInt(row.querySelector('input').value);
+        const price = parseFloat(row.dataset.price);
+
+        if (quantity && quantity > 0) {
+          products.push({ name: productName, qty: quantity, price: price });
+          totalAmount += quantity * price;
+        }
+      });
+
+      if (products.length === 0) {
+        alert('Please select at least one product.');
+        return;
+      }
+
+      // Create preview card
+      const previewCard = document.createElement('div');
+      previewCard.className = 'card';
+      previewCard.style.marginTop = '30px';
+
+      let html = `<h2>Order Preview</h2>
+                  <p><b>Name:</b> ${name}<br>
+                  <b>Phone:</b> ${phone}<br>
+                  <b>Email:</b> ${email}</p>
+                  <h3>Products:</h3>
+                  <ul>`;
+      products.forEach(p => {
+        html += `<li>${p.name} - Quantity: ${p.qty} - Price: ₹${p.qty * p.price}</li>`;
+      });
+      html += `</ul>
+               <h3>Total Amount: ₹${totalAmount}</h3>`;
+
+      previewCard.innerHTML = html;
+
+      // Append preview container
+      previewContainer.innerHTML = '';
+      previewContainer.appendChild(previewCard);
+
+      // Reset form
+      orderForm.reset();
+    });
+  </script>
+
+</body>
+</html>
